@@ -1,0 +1,5 @@
+library to babel 
+  npm i --save-dev babel-plugin-module-resolver 
+
+libray to expo google fonts
+npx expo install expo-font @expo-google-fonts/roboto
