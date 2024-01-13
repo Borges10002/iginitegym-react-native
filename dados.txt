@@ -3,3 +3,7 @@ library to babel
 
 libray to expo google fonts
 npx expo install expo-font @expo-google-fonts/roboto
+
+libray to components expo native-base
+https://docs.nativebase.io/install-expo
+  npm install native-base
