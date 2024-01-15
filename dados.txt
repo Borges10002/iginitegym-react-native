@@ -7,3 +7,10 @@ npx expo install expo-font @expo-google-fonts/roboto
 libray to components expo native-base
 https://docs.nativebase.io/install-expo
   npm install native-base
+  expo install react-native-svg@12.1.1
+  expo install react-native-safe-area-context@3.3.2
+
+libray to sgv transformer
+https://github.com/kristerkari/react-native-svg-transformer
+npm i react-native-svg-transformer  --save-dev
+
