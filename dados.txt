@@ -21,3 +21,6 @@ npx expo install react-native-screens react-native-safe-area-context
 npm install react-native-screens react-native-safe-area-context
 npm install @react-navigation/native-stack
 
+library to react-navigation
+https://reactnavigation.org/docs/tab-based-navigation
+npm install @react-navigation/bottom-tabs
