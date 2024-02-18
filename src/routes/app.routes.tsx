@@ -12,7 +12,6 @@ import { History } from "@screens/History";
 import { Home } from "@screens/Home";
 import { Profile } from "@screens/Profile";
 import { useTheme } from "native-base";
-import { color } from "native-base/lib/typescript/theme/styled-system";
 import { Platform } from "react-native";
 
 type AppRoutes = {
@@ -61,7 +60,7 @@ export function AppRoutes() {
         component={History}
         options={{
           tabBarIcon: ({ color }) => (
-            <HomeSvg fill={color} width={iconSize} height={iconSize} />
+            <HistorySvg fill={color} width={iconSize} height={iconSize} />
           ),
         }}
       />
