@@ -1,9 +1,14 @@
-import { Center, Text } from "native-base";
+import { HistoryCard } from "@components/HistoryCard";
+import { ScreenHeader } from "@components/ScreenHeader";
+import { VStack } from "native-base";
 
 export function History() {
   return (
-    <Center flex={1}>
-      <Text color="white">History</Text>
-    </Center>
+    <VStack flex={1}>
+      <ScreenHeader title="Histórico de Exercícios" />
+      <HistoryCard />
+      <HistoryCard />
+      <HistoryCard />
+    </VStack>
   );
 }
