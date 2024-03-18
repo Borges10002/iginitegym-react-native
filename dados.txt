@@ -24,3 +24,8 @@ npm install @react-navigation/native-stack
 library to react-navigation
 https://reactnavigation.org/docs/tab-based-navigation
 npm install @react-navigation/bottom-tabs
+
+
+library to image expo 
+ https://docs.expo.dev/versions/latest/sdk/imagepicker/
+ npx expo install expo-image-picker
