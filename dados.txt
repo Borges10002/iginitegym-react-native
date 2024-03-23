@@ -29,3 +29,7 @@ npm install @react-navigation/bottom-tabs
 library to image expo 
  https://docs.expo.dev/versions/latest/sdk/imagepicker/
  npx expo install expo-image-picker
+
+ library to filesystem expo 
+ https://docs.expo.dev/versions/latest/sdk/filesystem/
+ npx expo install expo-file-system
