@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 
 import { Center, Heading, Image, ScrollView, Text, VStack } from "native-base";
 
