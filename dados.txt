@@ -33,3 +33,7 @@ library to image expo
  library to filesystem expo 
  https://docs.expo.dev/versions/latest/sdk/filesystem/
  npx expo install expo-file-system
+
+ library to react hook form 
+   https://react-hook-form.com/
+   npm install react-hook-form
