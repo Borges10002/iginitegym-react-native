@@ -37,3 +37,7 @@ library to image expo
  library to react hook form 
    https://react-hook-form.com/
    npm install react-hook-form
+
+  library to react hook form validation 
+  https://react-hook-form.com/get-started#SchemaValidation
+  npm install @hookform/resolvers yup
