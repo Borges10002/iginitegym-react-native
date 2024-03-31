@@ -17,8 +17,17 @@ type FormDataProps = {
 };
 
 const signUpSchema = yup.object({
-  name: yup.string().required("Informe o nome"),
-  email: yup.string().required("Informe o e-mail").email("E-mail inválido"),
+  name: yup.string().required("Informe o nome."),
+  email: yup.string().required("Informe o e-mail").email("E-mail inválido."),
+  password: yup
+    .string()
+    .required("Infome a senha.")
+    .min(6, "A senha deve ter pelo menos 6 digitos."),
+
+  password_confirm: yup
+    .string()
+    .required("Confirme a senha.")
+    .oneOf([yup.ref("password"), null], "A confirmação da senha não confere."),
 });
 
 export function SignUp() {
@@ -101,6 +110,7 @@ export function SignUp() {
                 secureTextEntry
                 onChangeText={onChange}
                 value={value}
+                errorMessage={errors.password?.message}
               />
             )}
           />
@@ -116,6 +126,7 @@ export function SignUp() {
                 value={value}
                 onSubmitEditing={handleSubmit(handleSignUp)}
                 returnKeyType="send"
+                errorMessage={errors.password_confirm?.message}
               />
             )}
           />
@@ -127,7 +138,7 @@ export function SignUp() {
         </Center>
 
         <Button
-          mt={24}
+          mt={12}
           title="Volta para o login"
           variant="outline"
           onPress={handleGoBack}
