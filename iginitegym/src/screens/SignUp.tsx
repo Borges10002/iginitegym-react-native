@@ -43,8 +43,18 @@ export function SignUp() {
     navigation.goBack();
   }
 
-  function handleSignUp(data: FormDataProps) {
-    console.log(data);
+  async function handleSignUp(data: FormDataProps) {
+    const response = await fetch("http://192.168.3.11:3333/users", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...data }),
+    });
+
+    const result = await response.json();
+    console.log(result);
   }
 
   return (
