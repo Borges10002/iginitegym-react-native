@@ -1,13 +1,17 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation } from "@react-navigation/native";
 import { Center, Heading, Image, ScrollView, Text, VStack } from "native-base";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+
+import { api } from "@services/api";
+import axios from "axios";
 
 import BackgroundImg from "@assets/background.png";
 import LogoSvg from "@assets/logo.svg";
 import { Button } from "@components/Button";
 import { Input } from "@components/Input";
+import { Alert } from "react-native";
 
 type FormDataProps = {
   name: string;
@@ -27,7 +31,7 @@ const signUpSchema = yup.object({
   password_confirm: yup
     .string()
     .required("Confirme a senha.")
-    .oneOf([yup.ref("password"), null], "A confirmação da senha não confere."),
+    .oneOf([yup.ref("password"), null], "A confirmação da senha não confere"),
 });
 
 export function SignUp() {
@@ -44,7 +48,15 @@ export function SignUp() {
   }
 
   async function handleSignUp(data: FormDataProps) {
-    const response = await fetch("http://192.168.3.11:3333/users", {
+    try {
+      const response = await api.post("/users", { ...data });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        Alert.alert(error.response?.data.message);
+      }
+    }
+
+    /*const response = await fetch("http://192.168.3.11:3333/users", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -54,7 +66,7 @@ export function SignUp() {
     });
 
     const result = await response.json();
-    console.log(result);
+    console.log(result);*/
   }
 
   return (
