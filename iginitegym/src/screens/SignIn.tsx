@@ -33,6 +33,7 @@ export function SignIn() {
   const { signIn } = useAuth();
 
   const navigation = useNavigation<AuthNavigatorRoutesProps>();
+
   const toas = useToast();
 
   const {
