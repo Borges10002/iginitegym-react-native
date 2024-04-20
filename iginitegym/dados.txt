@@ -41,3 +41,7 @@ library to image expo
   library to react hook form validation 
   https://react-hook-form.com/get-started#SchemaValidation
   npm install @hookform/resolvers yup
+
+  libray to amazenamento de dados 
+    https://docs.expo.dev/versions/latest/sdk/async-storage/
+    npx expo install @react-native-async-storage/async-storage
