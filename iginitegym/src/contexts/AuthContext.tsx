@@ -4,7 +4,7 @@ import {
   storageUserGet,
   storageUserRemove,
   storageUserSave,
-} from "@storage/storageConfig";
+} from "@storage/storageUser";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
 export type AuthContextDataProps = {
