@@ -48,7 +48,7 @@ export function SignUp() {
   const [isLoading, setIsLoading] = useState(false);
 
   const toast = useToast();
-  const { signIn } = useAuth();
+  const { singIn } = useAuth();
 
   const {
     control,
@@ -67,7 +67,7 @@ export function SignUp() {
       setIsLoading(true);
 
       await api.post("/users", { ...data });
-      await signIn(data.email, data.password);
+      await singIn(data.email, data.password);
     } catch (error) {
       setIsLoading(false);
 
