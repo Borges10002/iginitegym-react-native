@@ -8,7 +8,7 @@ import {
   VStack,
   useToast,
 } from "native-base";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { ExerciseCard } from "@components/ExerciseCard";
 import { Group } from "@components/Group";
@@ -16,16 +16,11 @@ import { HomeHeader } from "@components/HomeHeader";
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
 import { api } from "@services/api";
 import { AppError } from "@utils/AppError";
+import { ExerciseDTO } from "@dtos/ExerciseDTO";
 
 export function Home() {
   const [groups, setGroups] = useState<string[]>([]);
-  const [exercises, setExercises] = useState([
-    "Puxada fontal",
-    "Remada curvada",
-    "Remada unilateral",
-    "Levantamentos terras",
-  ]);
-
+  const [exercises, setExercises] = useState<ExerciseDTO[]>([]);
   const [groupSelected, setGroupSelected] = useState("costa");
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
@@ -44,7 +39,25 @@ export function Home() {
       const isAppError = error instanceof AppError;
       const title = isAppError
         ? error.message
-        : "Não foi possivel carregar os grupo nesse momento";
+        : "Não foi possivel carregar os grupo musculares";
+
+      toast.show({
+        title,
+        placement: "top",
+        bgColor: "red.500",
+      });
+    }
+  }
+
+  async function fetchExerciseByGroup() {
+    try {
+      const responde = await api.get(`/exercises/bygroup/${groupSelected}`);
+      setExercises(responde.data);
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError
+        ? error.message
+        : "Não foi possivel carregar os exercícios";
 
       toast.show({
         title,
@@ -57,6 +70,12 @@ export function Home() {
   useEffect(() => {
     fetchGroups();
   }, []);
+
+  useEffect(
+    useCallback(() => {
+      fetchExerciseByGroup();
+    }, [groupSelected])
+  );
 
   return (
     <VStack flex={1}>
@@ -95,7 +114,7 @@ export function Home() {
 
         <FlatList
           data={exercises}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <ExerciseCard onPress={handleOpenExerciseDetails} />
           )}
