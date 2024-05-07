@@ -2,6 +2,7 @@ import { HStack, Heading, Image, Text, VStack, Icon } from "native-base";
 import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { ExerciseDTO } from "@dtos/ExerciseDTO";
+import { api } from "@services/api";
 
 type Props = TouchableOpacityProps & {
   data: ExerciseDTO;
@@ -20,7 +21,7 @@ export function ExerciseCard({ data, ...rest }: Props) {
       >
         <Image
           source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4HgE5VtoRYx0zF2MncpX2-Y0yTkT7ZMaBuA&usqp=CAU",
+            uri: `${api.defaults.baseURL}/exercise/thumb/${data.thumb}`,
           }}
           alt="Imagem do exercicio"
           w={16}
