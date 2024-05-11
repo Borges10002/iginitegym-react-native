@@ -100,6 +100,7 @@ export function Home() {
         }}
         my={10}
         maxH={10}
+        minH={10}
       />
 
       {isLoading ? (
@@ -127,7 +128,7 @@ export function Home() {
             )}
             showsVerticalScrollIndicator={false}
             _contentContainerStyle={{
-              paddingBottom: 20,
+              paddingBottom: 10,
             }}
           />
         </VStack>
