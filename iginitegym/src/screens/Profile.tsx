@@ -33,7 +33,22 @@ type FormDataProps = {
 };
 
 const profileSchema = yup.object({
-  name: yup.string().required("Informe o nome."),
+  name: yup.string().required("Informe o nome"),
+  password: yup
+    .string()
+    .min(6, "A senha deve ter pelo menos 6 dígitos.")
+    .nullable()
+    .transform((value) => (!!value ? value : null)),
+  password_confirm: yup
+    .string()
+    .nullable()
+    .transform((value) => (!!value ? value : null))
+    .oneOf([yup.ref("password"), null], "As senhas devem ser iguais.")
+    .when("password", {
+      is: (Field: any) => Field,
+      then: (schema) =>
+        schema.nullable().required("Informe a confirmação da senha."),
+    }),
 });
 
 export function Profile() {
@@ -49,7 +64,7 @@ export function Profile() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormDataProps>({
+  } = useForm<FormDataProps | any>({
     defaultValues: {
       name: user.name,
       email: user.email,
@@ -92,6 +107,8 @@ export function Profile() {
       setPhotoIsLoading(false);
     }
   }
+
+  async function handleProfileUpdate(data: FormDataProps) {}
 
   return (
     <VStack flex={1}>
