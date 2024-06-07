@@ -21,6 +21,8 @@ import { ScreenHeader } from "@components/ScreenHeader";
 import { UserPhoto } from "@components/UserPhoto";
 import { TouchableOpacity } from "react-native";
 import { useAuth } from "@hooks/useAuth";
+import { api } from "@services/api";
+import { AppError } from "@utils/AppError";
 
 const PHOTO_SIZE = 33;
 
@@ -52,6 +54,7 @@ const profileSchema = yup.object({
 });
 
 export function Profile() {
+  const [isUpdating, setUpdating] = useState(false);
   const [photoIsLoading, setPhotoIsLoading] = useState(false);
   const [userPhoto, setUserPhoto] = useState(
     "https://github.com/Borges10002.png"
@@ -108,7 +111,32 @@ export function Profile() {
     }
   }
 
-  async function handleProfileUpdate(data: FormDataProps) {}
+  async function handleProfileUpdate(data: FormDataProps) {
+    try {
+      setUpdating(true);
+
+      await api.put("users", data);
+
+      toast.show({
+        title: "Perfil atualizado com sucesso!",
+        placement: "top",
+        bgColor: "green.500",
+      });
+    } catch (error) {
+      const isAppError = error instanceof AppError;
+      const title = isAppError
+        ? error.message
+        : "Não foi possivel atualizar os dados.";
+
+      toast.show({
+        title,
+        placement: "top",
+        bgColor: "red.500",
+      });
+    } finally {
+      setUpdating(false);
+    }
+  }
 
   return (
     <VStack flex={1}>
@@ -228,6 +256,7 @@ export function Profile() {
             title="Atualizar"
             mt={4}
             onPress={handleSubmit(handleProfileUpdate)}
+            isLoading={isUpdating}
           />
         </Center>
       </ScrollView>
