@@ -108,9 +108,33 @@ export function Profile() {
           name: `${user.name}.${fileExtension}`.toLocaleLowerCase(),
           uri: photoInfo.uri,
           type: `${photoSelected.assets[0].type}/${fileExtension}`,
-        };
+        } as any;
 
-        console.log(photoFile);
+        const userPhotoUploadForm = new FormData();
+
+        userPhotoUploadForm.append("avatar", photoFile);
+
+        const avatarUpdtedResponse = await api.patch(
+          "/users/avatar",
+          userPhotoUploadForm,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        const userUpdated = user;
+
+        userUpdated.avatar = avatarUpdtedResponse.data.avatar;
+
+        await updateUserProfile(userUpdated);
+
+        toast.show({
+          title: "Foto atualizada!",
+          placement: "top",
+          bgColor: "green.500",
+        });
       }
     } catch (error) {
       console.log(error);
