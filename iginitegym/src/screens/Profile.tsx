@@ -24,6 +24,8 @@ import { useAuth } from "@hooks/useAuth";
 import { api } from "@services/api";
 import { AppError } from "@utils/AppError";
 
+import defaulUserPhotoImg from "@assets/userPhotoDefault.png";
+
 const PHOTO_SIZE = 33;
 
 type FormDataProps = {
@@ -114,6 +116,8 @@ export function Profile() {
 
         userPhotoUploadForm.append("avatar", photoFile);
 
+        console.log(userPhotoUploadForm);
+
         const avatarUpdtedResponse = await api.patch(
           "/users/avatar",
           userPhotoUploadForm,
@@ -125,9 +129,7 @@ export function Profile() {
         );
 
         const userUpdated = user;
-
         userUpdated.avatar = avatarUpdtedResponse.data.avatar;
-
         await updateUserProfile(userUpdated);
 
         toast.show({
@@ -191,7 +193,11 @@ export function Profile() {
             />
           ) : (
             <UserPhoto
-              source={{ uri: userPhoto }}
+              source={
+                user.avatar
+                  ? { uri: `${api.defaults.baseURL}/avatar/${user.avatar}` }
+                  : defaulUserPhotoImg
+              }
               alt="Foto do usuário"
               size={PHOTO_SIZE}
             />
