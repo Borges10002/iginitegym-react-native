@@ -13,19 +13,18 @@ const app = express();
 
 app.use("/avatar", express.static(uploadConfig.UPLOADS_FOLDER));
 
-const demoExercisePath = path.resolve(__dirname, "..", "exercises", "gif")
+const demoExercisePath = path.resolve(__dirname, "..", "exercises", "gif");
 app.use("/exercise/demo", express.static(demoExercisePath));
 
-const thumbExercisesPath = path.resolve(__dirname, "..", "exercises", "thumb")
+const thumbExercisesPath = path.resolve(__dirname, "..", "exercises", "thumb");
 app.use("/exercise/thumb", express.static(thumbExercisesPath));
-
 
 const routes = require("./routes");
 
 app.use(express.json());
 app.use(cors());
 
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use(routes);
 
